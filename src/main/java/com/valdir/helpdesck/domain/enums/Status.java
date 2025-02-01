@@ -1,7 +1,7 @@
 package com.valdir.helpdesck.domain.enums;
 import java.lang.IllegalArgumentException;
 
-public enum Estatus {
+public enum Status {
     ABERTO(0, "ABERTO"),
     ANDAMENTO(1, "ANDAMENTO"),
     ENCERRADO(2, "ENCERRADO");
@@ -9,7 +9,7 @@ public enum Estatus {
     private Integer codigo;
     private String descricao;
 
-    private Estatus(Integer codigo, String descricao) {
+    private Status(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
@@ -22,12 +22,12 @@ public enum Estatus {
         return descricao;
     }
 
-    public static Estatus toEnum(Integer cod) {
+    public static Status toEnum(Integer cod) {
         if (cod == null) {
             return null;
         }
 
-        for (Estatus x : Estatus.values()) {
+        for (Status x : Status.values()) {
             if (cod.equals(x.getCodigo())) {
                 return x;
             }
