@@ -2,19 +2,42 @@ package com.valdir.helpdesck.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
-import com.valdir.helpdesck.domain.enums.Perfil;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public abstract class Pessoa {
-    
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.valdir.helpdesck.domain.enums.Perfil;
+@Entity // informa que pessoa é uma entidade e que será criado uma tabelça pra ela no banco de dados.
+public abstract class Pessoa implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
     protected String nome;
+
+    @Column(unique = true) // valor único no banco de dados
     protected String cpf;
+
+    @Column(unique = true)
     protected String email;
     protected String senha;
+
+    @ElementCollection(fetch = FetchType.EAGER)//assegura que a lista de perfil vm junto com os usuários, para uso em níveis de acesso.
+    @CollectionTable(name = "PERFIS")
     protected Set<Integer> perfis = new HashSet<>();
+    
+    @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
     
     // criar construtor tipo super class sem parametros (vazio)
