@@ -11,13 +11,13 @@ import com.valdir.helpdesck.domain.enums.Perfil;
 public class Cliente extends Pessoa { // com isso pega todos o satributos da classe pessoa
 
     private static final long serialVersionUID = 1L;
-    @OneToMany(mappedBy = "tecnico")
+    @OneToMany(mappedBy = "cliente")
     private List<Chamado> chamados = new ArrayList<>();
    
 
     public Cliente() {
         super();
-        addPerfil(Perfil.CLIENTE);
+        addPerfil(Perfil.CLIENTE);// desa forma quando um cliente for instanciado ele já recebe o perfil de cliente
     }
 
     public Cliente(Integer id, String nome, String cpf, String email, String senha) {

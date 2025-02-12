@@ -12,12 +12,12 @@ import com.valdir.helpdesck.domain.enums.Perfil;
 public class Tecnico extends Pessoa {
     private static final long serialVersionUID = 1L;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {
         super();
-        addPerfil(Perfil.CLIENTE);
+        addPerfil(Perfil.CLIENTE);// qunado um tecnico for istanciado ele recebe o perfil de tecnico.
     }
 
     public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
